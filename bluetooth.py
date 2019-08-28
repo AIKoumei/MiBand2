@@ -17,7 +17,11 @@ def scan():
     scanner = Scanner().withDelegate(ScanDelegate())
     devices = scanner.scan(5.0)
 
+    result = []
     for dev in devices:
         print("Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi))
         for (adtype, desc, value) in dev.getScanData():
             print("%s, %s = %s" % (adtype, desc, value))
+        result.append({"name" : dev.getValueText(9), "mac": dev.addr})
+            
+    return result
