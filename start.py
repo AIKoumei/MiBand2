@@ -1,3 +1,12 @@
+# 功能
+# 1、连接后除非主动销毁否则保持连接
+# 2、10秒检测连接心跳，否则尝试每10秒尝试重连
+# 3、提供获取功能列表方法
+# 4、提供发送单独功能 msg 方法
+# 5、提供匹配、退出连接方法
+# 6、提供扫描蓝牙设备方法
+
+
 # import sys
 # import time
 # import argparse
@@ -27,3 +36,23 @@
 # band.send_alert(ALERT_TYPES.MESSAGE)
 
 # band.disconnect()
+
+
+# 测试，异步IO
+import functools
+import asyncio
+import sys
+
+async def timeout(loop):
+    print('请在 3 秒内输入，否则结束程序。')
+    await asyncio.sleep(3)
+    loop.stop()
+
+def echo(loop):
+    print("您输入了: " + sys.stdin.readline(), end='')
+    loop.stop()
+
+loop = asyncio.get_event_loop()
+asyncio.ensure_future(timeout(loop))
+loop.add_reader(sys.stdin, functools.partial(echo, loop=loop))
+loop.run_forever()
