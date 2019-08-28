@@ -61,4 +61,5 @@
 import bluetooth
 
 if __name__ == '__main__':
-    bluetooth.scan()
+    result = bluetooth.scan()
+    print(result)
