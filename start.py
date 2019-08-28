@@ -38,21 +38,26 @@
 # band.disconnect()
 
 
-# 测试，异步IO
-import functools
-import asyncio
-import sys
+# # 测试，异步IO
+# import functools
+# import asyncio
+# import sys
 
-async def timeout(loop):
-    print('请在 3 秒内输入，否则结束程序。')
-    await asyncio.sleep(3)
-    loop.stop()
+# async def timeout(loop):
+#     print('请在 3 秒内输入，否则结束程序。')
+#     await asyncio.sleep(3)
+#     loop.stop()
 
-def echo(loop):
-    print("您输入了: " + sys.stdin.readline(), end='')
-    loop.stop()
+# def echo(loop):
+#     print("您输入了: " + sys.stdin.readline(), end='')
+#     loop.stop()
 
-loop = asyncio.get_event_loop()
-asyncio.ensure_future(timeout(loop))
-loop.add_reader(sys.stdin, functools.partial(echo, loop=loop))
-loop.run_forever()
+# loop = asyncio.get_event_loop()
+# asyncio.ensure_future(timeout(loop))
+# loop.add_reader(sys.stdin, functools.partial(echo, loop=loop))
+# loop.run_forever()
+
+
+import bluetooth
+
+bluetooth.scan()
