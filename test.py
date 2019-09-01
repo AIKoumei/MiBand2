@@ -62,7 +62,7 @@
 
 
 import bluetooth
-import lin.miban2.example
+from lib.miband2 import * 
 
 if __name__ == '__main__':
     result = bluetooth.scan()
@@ -78,7 +78,7 @@ if __name__ == '__main__':
 
     if miband2_device == None:
         print("[info] no miband2 device found. exit.")
-        return
+        pass 
 
     # connect to miband2
     band = MiBand2(miband2_device["mac"], debug=True)
@@ -89,7 +89,7 @@ if __name__ == '__main__':
             print("[info] init OK")
         else:
             print("[info] init failed. exit.")
-            return
+            pass 
 
         
     band.disconnect()
