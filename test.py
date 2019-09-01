@@ -64,6 +64,7 @@
 import bluetooth
 from lib.miband2 import * 
 from lib.miband2.base import MiBand2
+from lib.miband2.constants import ALERT_TYPES
 
 def main():
     result = bluetooth.scan()
@@ -92,6 +93,9 @@ def main():
             print("[info] init failed. exit.")
             pass 
 
+    print("[info] test connection")
+    band.send_alert(ALERT_TYPES.NONE)
+
         
     band.disconnect()
 
@@ -99,4 +103,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-    
+
