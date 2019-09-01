@@ -63,6 +63,7 @@
 
 import bluetooth
 from lib.miband2 import * 
+from lib.miband2.base import MiBand2
 
 if __name__ == '__main__':
     result = bluetooth.scan()
