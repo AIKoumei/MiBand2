@@ -87,14 +87,27 @@ def main():
     band.setSecurityLevel(level="medium")
 
     if not band.authenticate():
+        print("[info] band authenticate now")
         if band.initialize():
             print("[info] init OK")
         else:
             print("[info] init failed. exit.")
             pass 
+    else:
+        print("[info] band bad authenticated")
 
     print("[info] test connection")
+    time.sleep(3)
     band.send_alert(ALERT_TYPES.NONE)
+
+    time.sleep(3)
+    print ('[info] Soft revision:',band.get_revision())
+    print ('[info] Hardware revision:',band.get_hrdw_revision())
+    print ('[info] Serial:',band.get_serial())
+    print ('[info] Battery:', band.get_battery_info())
+    print ('[info] Time:', band.get_current_time())
+    print ('[info] Steps:', band.get_steps())
+    print ('[info] Heart rate oneshot:', band.get_heart_rate_one_time())
 
         
     band.disconnect()
