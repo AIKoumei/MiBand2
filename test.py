@@ -66,6 +66,7 @@ import time
 from lib.miband2 import * 
 from lib.miband2.base import MiBand2
 from lib.miband2.constants import ALERT_TYPES
+import struct
 
 def main():
     result = bluetooth.scan()
@@ -95,7 +96,7 @@ def main():
             print("[info] init failed. exit.")
             pass 
     else:
-        print("[info] band bad authenticated")
+        print("[info] band had authenticated")
 
     print("[info] test connection")
     time.sleep(3)
@@ -171,7 +172,18 @@ def alert(band, _type):
     if band == None or _type == None:
         return
     band.send_alert(_type)
+
     
+def testType(band):
+    if band == None or _type == None:
+        return
+    msg_list = [struct.pack('B', x) for x in range(16*16)]
+    alert(band, ALERT_TYPES.NONE)
+    for msg in msg_list:
+        print("test msg: ", struct.unpack('B', msg))
+        alert(band, msg)
+        time.sleep(0.5)
+        alert(band, ALERT_TYPES.NONE)
 
 
 if __name__ == '__main__':
