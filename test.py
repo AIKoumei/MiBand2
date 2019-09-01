@@ -165,6 +165,12 @@ def disconnect(band):
         return
     print("[info] disconnected")
     band.disconnect()
+
+    
+def alert(band, _type):
+    if band == None or _type == None:
+        return
+    band.send_alert(_type)
     
 
 
