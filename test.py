@@ -146,7 +146,7 @@ def getMiBand2():
 
     print("[info] test connection")
     time.sleep(3)
-    band.send_alert(ALERT_TYPES.NONE)
+    band.send_alert(ALERT_TYPES.MESSAGE)
 
     time.sleep(3)
     print ('[info] Soft revision:',band.get_revision())
@@ -155,7 +155,7 @@ def getMiBand2():
     print ('[info] Battery:', band.get_battery_info())
     print ('[info] Time:', band.get_current_time())
     print ('[info] Steps:', band.get_steps())
-    print ('[info] Heart rate oneshot:', band.get_heart_rate_one_time())
+    # print ('[info] Heart rate oneshot:', band.get_heart_rate_one_time())
 
     return band
 
