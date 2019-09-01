@@ -65,7 +65,7 @@ import bluetooth
 from lib.miband2 import * 
 from lib.miband2.base import MiBand2
 
-if __name__ == '__main__':
+def main():
     result = bluetooth.scan()
     print("'[info] find devices:", result)
 
@@ -94,3 +94,9 @@ if __name__ == '__main__':
 
         
     band.disconnect()
+
+
+if __name__ == '__main__':
+    main()
+
+    
