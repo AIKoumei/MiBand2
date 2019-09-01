@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# coding=utf-8
+
 # 功能
 # 1、连接后除非主动销毁否则保持连接
 # 2、10秒检测连接心跳，否则尝试每10秒尝试重连
@@ -59,7 +62,34 @@
 
 
 import bluetooth
+import lin.miban2.example
 
 if __name__ == '__main__':
     result = bluetooth.scan()
-    print(result)
+    print("'[info] find devices:", result)
+
+    miband2_device = None
+    for device in result:
+        if device["name"] == "MI Band 2":
+            miband2_device = device
+            break
+    
+    print("'[info] find MI Band 2:", miband2_device)
+
+    if miband2_device == None:
+        print("[info] no miband2 device found. exit.")
+        return
+
+    # connect to miband2
+    band = MiBand2(miband2_device["mac"], debug=True)
+    band.setSecurityLevel(level="medium")
+
+    if not band.authenticate():
+        if band.initialize():
+            print("[info] init OK")
+        else:
+            print("[info] init failed. exit.")
+            return
+
+        
+    band.disconnect()
