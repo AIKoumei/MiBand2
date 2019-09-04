@@ -130,7 +130,7 @@ def getMiBand2():
 
     if miband2_device == None:
         print("[info] no miband2 device found. exit.")
-        pass 
+        return 
 
     # connect to miband2
     band = MiBand2(miband2_device["mac"], debug=True)
@@ -144,7 +144,7 @@ def getMiBand2():
             print("[info] init failed. exit.")
             pass 
     else:
-        print("[info] band bad authenticated")
+        print("[info] band had authenticated")
 
     print("[info] test connection")
     time.sleep(3)
