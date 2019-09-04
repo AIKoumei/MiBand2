@@ -66,6 +66,7 @@ import time
 from lib.miband2 import * 
 from lib.miband2.base import MiBand2
 from lib.miband2.constants import ALERT_TYPES
+from lib.miband2.constants import UUIDS
 import struct
 
 def main():
