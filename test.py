@@ -192,7 +192,7 @@ def testUUIDSOne(band, uuid = UUIDS.CHARACTERISTIC_BATTERY):
         return
     try:
         print("test uuid : ", uuid)
-        ch = p.getCharacteristics(uuid=uuid)[0]
+        ch = p.getCharacteristics(uuid)[0]
         if (ch.supportsRead()):
             print(uuid + " : " + ch.read())
     except :
@@ -203,7 +203,7 @@ def testUUIDS(band):
     if band == None:
         return
     try:
-        ch = p.getCharacteristics(uuid=uuid)[0]
+        ch = p.getCharacteristics(uuid)[0]
         if (ch.supportsRead()):
             print("test uuid : " +  uuid + " : " + ch.read())
     except :
