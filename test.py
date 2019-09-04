@@ -175,7 +175,7 @@ def alert(band, _type):
 
     
 def testType(band):
-    if band == None or _type == None:
+    if band == None:
         return
     msg_list = [struct.pack('B', x) for x in range(16*16)]
     alert(band, ALERT_TYPES.NONE)
@@ -184,6 +184,25 @@ def testType(band):
         alert(band, msg)
         time.sleep(0.5)
         alert(band, ALERT_TYPES.NONE)
+
+    
+def testUUIDSOne(band, type = UUIDS.CHARACTERISTIC_BATTERY):
+    if band == None:
+        return
+    try:
+        ch = p.getCharacteristics(uuid=uuid)[0]
+        if (ch.supportsRead()):
+            print(uuid + " : " + ch.read())
+
+    
+def testUUIDS(band):
+    if band == None:
+        return
+    try:
+        ch = p.getCharacteristics(uuid=uuid)[0]
+        if (ch.supportsRead()):
+            print(uuid + " : " + ch.read())
+    time.sleep(0.2)
 
 
 if __name__ == '__main__':
