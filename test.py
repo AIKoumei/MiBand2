@@ -222,7 +222,10 @@ def testUUIDS(band):
 
     
 def reimport():
-    del sys.modules['test']
+    try :
+        del sys.modules['test']
+    except :
+        pass
 
 
 if __name__ == '__main__':
