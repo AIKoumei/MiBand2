@@ -223,7 +223,6 @@ def testUUIDS(band):
     
 def reimport():
     del sys.modules['test']
-    del test
 
 
 if __name__ == '__main__':
