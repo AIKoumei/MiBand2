@@ -62,6 +62,7 @@
 
 
 import bluetooth
+import sys
 import time
 from lib.miband2 import * 
 from lib.miband2.base import MiBand2
