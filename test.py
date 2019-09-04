@@ -169,6 +169,12 @@ def disconnect(band):
     band.disconnect()
 
     
+def find_band(band):
+    if band == None:
+        return
+    band.send_alert(ALERT_TYPES.FIND_DEVICE)
+
+    
 def alert(band, _type):
     if band == None or _type == None:
         return
@@ -192,7 +198,7 @@ def testUUIDSOne(band, uuid = UUIDS.CHARACTERISTIC_BATTERY):
         return
     try:
         print("test one uuid : " + uuid)
-        ch = p.getCharacteristics(uuid)[0]
+        ch = band.getCharacteristics(uuid)[0]
         print("test one uuid : " + uuid + " : " + ch.read())
         # if (ch.supportsRead()):
     except :
