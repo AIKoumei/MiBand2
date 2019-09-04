@@ -228,7 +228,7 @@ def testServiceSimple(band):
     result = []
     for i in range(16**4 - 1):
         _uuid = base % "{:0>4s}".format(str(hex(i))[2:])[-4:]
-        print("test uuid : ", _uuid)
+        print("test uuid : "+ _uuid)
         uuid, service = testServiceOne(band, _uuid)
         if uuid == None :
             pass
@@ -248,7 +248,7 @@ def testServiceSimple(band):
                     for i in range(16**12 - 1):
                         e = "{:0>12s}".format(str(hex(i))[2:])[-12:]
                         _uuid = "%s-%s-%s-%s-%s" % (a, b, c, d, e)
-                        print("test uuid : ", _uuid)
+                        print("test uuid : " + _uuid)
                         uuid, service = testServiceOne(band, _uuid)
                         if uuid == None :
                             pass
