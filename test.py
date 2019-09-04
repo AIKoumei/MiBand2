@@ -227,7 +227,9 @@ def testServiceSimple(band):
     base = UUIDS.BASE
     result = []
     for i in range(16**4 - 1):
-        uuid, service = testServiceOne(band, base % "{:0>4s}".format(str(hex(i))[2:])[-4:] )
+        _uuid = base % "{:0>4s}".format(str(hex(i))[2:])[-4:]
+        print("test uuid : ", _uuid)
+        uuid, service = testServiceOne(band, _uuid)
         result.append({
             'uuid' : uuid,
             'service' : service,
@@ -238,7 +240,6 @@ def testServiceSimple(band):
 def reimport():
     try :
         del sys.modules['test']
-        import test
     except :
         pass
 
