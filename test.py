@@ -209,16 +209,15 @@ def testUUIDSOne(band, uuid = UUIDS.CHARACTERISTIC_BATTERY):
         pass
 
     
-def testUUIDS(band):
+def testServiceOne(band, uuid = UUIDS.SERVICE_MIBAND1):
     if band == None:
         return
     try:
-        ch = p.getCharacteristics(uuid = uuid)[0]
-        if (ch.supportsRead()):
-            print("test uuid : " +  uuid + " : " + ch.read())
+        service = band.getServiceByUUID(uuid)
+        print("service found : " + uuid)
+        print("service : ", service)
     except :
         pass
-    time.sleep(0.2)
 
     
 def reimport():
