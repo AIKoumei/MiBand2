@@ -230,10 +230,32 @@ def testServiceSimple(band):
         _uuid = base % "{:0>4s}".format(str(hex(i))[2:])[-4:]
         print("test uuid : ", _uuid)
         uuid, service = testServiceOne(band, _uuid)
+        if uuid == None :
+            pass
         result.append({
             'uuid' : uuid,
             'service' : service,
         })
+    
+    for i in range(16**8 - 1):
+        a = "{:0>8s}".format(str(hex(i))[2:])[-8:]
+        for i in range(16**4 - 1):
+            b = "{:0>4s}".format(str(hex(i))[2:])[-4:]
+            for i in range(16**4 - 1):
+                c = "{:0>4s}".format(str(hex(i))[2:])[-4:]
+                for i in range(16**4 - 1):
+                    d = "{:0>4s}".format(str(hex(i))[2:])[-4:]
+                    for i in range(16**12 - 1):
+                        e = "{:0>12s}".format(str(hex(i))[2:])[-12:]
+                        _uuid = "%s-%s-%s-%s-%s" % (a, b, c, d, e)
+                        print("test uuid : ", _uuid)
+                        uuid, service = testServiceOne(band, _uuid)
+                        if uuid == None :
+                            pass
+                        result.append({
+                            'uuid' : uuid,
+                            'service' : service,
+                        })
     return result
 
     
