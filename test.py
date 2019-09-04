@@ -187,10 +187,11 @@ def testType(band):
         alert(band, ALERT_TYPES.NONE)
 
     
-def testUUIDSOne(band, type = UUIDS.CHARACTERISTIC_BATTERY):
+def testUUIDSOne(band, uuid = UUIDS.CHARACTERISTIC_BATTERY):
     if band == None:
         return
     try:
+        print("test uuid : ", uuid)
         ch = p.getCharacteristics(uuid=uuid)[0]
         if (ch.supportsRead()):
             print(uuid + " : " + ch.read())
@@ -204,7 +205,7 @@ def testUUIDS(band):
     try:
         ch = p.getCharacteristics(uuid=uuid)[0]
         if (ch.supportsRead()):
-            print(uuid + " : " + ch.read())
+            print("test uuid : " +  uuid + " : " + ch.read())
     except :
         pass
     time.sleep(0.2)
