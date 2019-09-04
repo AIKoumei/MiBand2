@@ -226,6 +226,7 @@ def testServiceSimple(band):
         return
     base = UUIDS.BASE
     result = []
+    _uuid, uuid, service = None, None, None
     for i in range(16**4 - 1):
         _uuid = base % "{:0>4s}".format(str(hex(i))[2:])[-4:]
         print("test uuid : "+ _uuid)
