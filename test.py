@@ -116,8 +116,8 @@ def main():
     band.disconnect()
 
     
-def getMiBand2():
-    result = bluetooth.scan()
+def getMiBand2(timeout = 5):
+    result = bluetooth.scan(timeout)
     print("[info] find devices:", result)
 
     miband2_device = None

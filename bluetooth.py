@@ -13,9 +13,9 @@ class ScanDelegate(DefaultDelegate):
         elif isNewData:
             print("Received new data from", dev.addr)
 
-def scan():
+def scan(timeout = 5):
     scanner = Scanner().withDelegate(ScanDelegate())
-    devices = scanner.scan(5.0)
+    devices = scanner.scan(timeout)
 
     result = []
     for dev in devices:
