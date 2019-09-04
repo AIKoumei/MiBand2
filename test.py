@@ -216,13 +216,29 @@ def testServiceOne(band, uuid = UUIDS.SERVICE_MIBAND1):
         service = band.getServiceByUUID(uuid)
         print("service found : " + uuid)
         print("service : ", service)
+        return uuid, service
     except :
-        pass
+        return None, None
+
+    
+def testServiceSimple(band):
+    if band == None:
+        return
+    base = UUIDS.BASE
+    result = []
+    for i in range(16**4 - 1):
+        uuid, service = testServiceOne(band, base % "{:0>4s}".format(str(hex(i))[2:])[-4:] )
+        result.append({
+            'uuid' : uuid,
+            'service' : service,
+        })
+    return result
 
     
 def reimport():
     try :
         del sys.modules['test']
+        import test
     except :
         pass
 
