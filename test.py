@@ -199,8 +199,11 @@ def testUUIDSOne(band, uuid = UUIDS.CHARACTERISTIC_BATTERY):
     try:
         print("test one uuid : " + uuid)
         ch = band.getCharacteristics(uuid)[0]
-        print("test one uuid : " + uuid + " : " + ch.read())
-        # if (ch.supportsRead()):
+        data = ch.read()
+        print("test one uuid : " + uuid + " : " + data)
+        if (ch.supportsRead()):
+            print("test one uuid supportsRead : " + uuid + " : " + data)
+        return data
     except :
         pass
 
@@ -215,6 +218,11 @@ def testUUIDS(band):
     except :
         pass
     time.sleep(0.2)
+
+    
+def reimport():
+    del sys.modules['test']
+    del test
 
 
 if __name__ == '__main__':
