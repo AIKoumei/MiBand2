@@ -249,7 +249,8 @@ def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None, bar = N
             bar.update(1)
     return uuid, service
 
-    
+
+progress_bar = None
 def testServiceSimpleAsync(band):
     if band == None:
         return
@@ -292,7 +293,7 @@ def testServiceSimpleAsync(band):
     make_tasks_progress_bar.close()
 
     # run
-    loop.run_until_complete(asyncio.wait(tasks))
+    # loop.run_until_complete(asyncio.wait(tasks))
     # loop.close()
     # close file
     file.close()
