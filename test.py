@@ -270,20 +270,20 @@ def testServiceSimpleAsync(band):
         # print("task uuid : " + _uuid)
         make_tasks_progress_bar.update(1)
         
-    for i in range(16**8 - 1):
-        a = "{:0>8s}".format(str(hex(i))[2:])[-8:]
-        for i in range(16**4 - 1):
-            b = "{:0>4s}".format(str(hex(i))[2:])[-4:]
-            for i in range(16**4 - 1):
-                c = "{:0>4s}".format(str(hex(i))[2:])[-4:]
-                for i in range(16**4 - 1):
-                    d = "{:0>4s}".format(str(hex(i))[2:])[-4:]
-                    for i in range(16**12 - 1):
-                        e = "{:0>12s}".format(str(hex(i))[2:])[-12:]
-                        _uuid = "%s-%s-%s-%s-%s" % (a, b, c, d, e)
-                        # print("task uuid : " + _uuid)
-                        tasks.append(testServiceOneAsync(band, _uuid, file = file, bar = progress_bar))
-                        make_tasks_progress_bar.update(1)
+    # for i in range(16**8 - 1):
+    #     a = "{:0>8s}".format(str(hex(i))[2:])[-8:]
+    #     for i in range(16**4 - 1):
+    #         b = "{:0>4s}".format(str(hex(i))[2:])[-4:]
+    #         for i in range(16**4 - 1):
+    #             c = "{:0>4s}".format(str(hex(i))[2:])[-4:]
+    #             for i in range(16**4 - 1):
+    #                 d = "{:0>4s}".format(str(hex(i))[2:])[-4:]
+    #                 for i in range(16**12 - 1):
+    #                     e = "{:0>12s}".format(str(hex(i))[2:])[-12:]
+    #                     _uuid = "%s-%s-%s-%s-%s" % (a, b, c, d, e)
+    #                     # print("task uuid : " + _uuid)
+    #                     tasks.append(testServiceOneAsync(band, _uuid, file = file, bar = progress_bar))
+    #                     make_tasks_progress_bar.update(1)
     print("task len : " + str(len(tasks)))
     make_tasks_progress_bar.close()
 
