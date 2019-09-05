@@ -224,13 +224,14 @@ def testServiceOne(band, uuid = UUIDS.SERVICE_MIBAND1):
         return None, None
 
 
-async def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None):
+@asyncio.coroutine
+def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None):
     if band == None:
         return
 
     print("test uuid : "+ uuid)
     try:
-        service = await band.getServiceByUUID(uuid)
+        service = yield from band.getServiceByUUID(uuid)
         print("service found : " + uuid)
         print("service : ", service)
         if file :
