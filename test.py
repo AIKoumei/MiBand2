@@ -230,15 +230,20 @@ def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None, bar = N
     if band == None:
         return
 
+    # print("test uuid : "+ uuid)
+    if file :
+        file.write("test uuid : "+ uuid)
+        
     try:
         service = yield from band.getServiceByUUID(uuid)
-        print("service found : " + uuid)
-        print("service : ", service)
+        # print("service found : " + uuid)
+        # print("service : ", service)
         if file :
             file.write({'uuid' : uuid, 'service' : service,})
         return 
     except :
-        print("no service with uuid : " + uuid)
+        # print("no service with uuid : " + uuid)
+        pass
     finally:
         if bar :
             bar.update(1)
@@ -259,8 +264,8 @@ def testServiceSimpleAsync(band):
     tasks = []
 
     # progress bar
-    progress_bar = tqdm(total=(16**4-1 + (16**30-1)), ascii=True, ncols=47, unit_scale=True)
-    make_tasks_progress_bar = tqdm(total=(16**4-1 + (16**30-1)), ascii=True, ncols=47, unit_scale=True)
+    progress_bar = tqdm(total=(16**4-1 + (16**30-1)), ascii=True, ncols=47, unit_scale=True, position=1)
+    make_tasks_progress_bar = tqdm(total=(16**4-1 + (16**30-1)), ascii=True, ncols=47, unit_scale=True, position=2)
     
     # make tasks
     for i in range(16**4 - 1):
