@@ -326,7 +326,7 @@ def reimport():
 @asyncio.coroutine
 def async_test_gen():
     print('Hello world! (%s)' % threading.currentThread())
-    yield from asyncio.sleep(   )
+    yield from asyncio.sleep(1)
     print('Hello again! (%s)' % threading.currentThread())
 
 
