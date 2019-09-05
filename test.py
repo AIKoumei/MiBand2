@@ -259,7 +259,7 @@ def testServiceSimpleAsync(band):
         tasks.append(testServiceOneAsync(band, _uuid, band))
         print("task _uuid : " + _uuid)
     # run
-    print("task len : " + len(tasks))
+    print("task len : " + str(len(tasks)))
     loop.run_until_complete(asyncio.wait(tasks))
     loop.close()
     # close file
