@@ -266,12 +266,14 @@ def testServiceSimpleAsync(band):
     tasks = []
 
     # progress bar
-    progress_bar = tqdm(total=(16**4-1 + (16**30-1)), unit_scale=True)
+    make_progress_bar = tqdm(total=(16**4-1 + (16**30-1)), unit_scale=True, position=1)
+    progress_bar = tqdm(total=(16**4-1 + (16**30-1)), unit_scale=True, position=2)
     
     # make tasks
     for i in range(16**4 - 1):
         _uuid = base % "{:0>4s}".format(str(hex(i))[2:])[-4:]
         tasks.append(testServiceOneAsync(band, _uuid, file))
+        make_progress_bar.update(1)
         # print("task uuid : " + _uuid)
         
     for i in range(16**8 - 1):
@@ -286,6 +288,7 @@ def testServiceSimpleAsync(band):
                         e = "{:0>12s}".format(str(hex(i))[2:])[-12:]
                         _uuid = "%s-%s-%s-%s-%s" % (a, b, c, d, e)
                         # print("task uuid : " + _uuid)
+                        make_progress_bar.update(1)
                         tasks.append(testServiceOneAsync(band, _uuid, file = file, bar = progress_bar))
     print("task len : " + str(len(tasks)))
 
