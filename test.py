@@ -260,7 +260,7 @@ def testServiceSimpleAsync(band):
     tasks = []
 
     # progress bar
-    progress_bar = tqdm(total=len(16**4-1 + (16**30-1)))
+    progress_bar = tqdm(total=(16**4-1 + (16**30-1)))
     
     # make tasks
     for i in range(16**4 - 1):
