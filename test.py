@@ -262,7 +262,7 @@ def testServiceSimpleAsync(band):
     # run
     print("task len : " + str(len(tasks)))
     loop.run_until_complete(asyncio.wait(tasks))
-    loop.close()
+    # loop.close()
     # close file
     file.close()
 
@@ -326,7 +326,7 @@ def reimport():
 @asyncio.coroutine
 def async_test_gen():
     print('Hello world! (%s)' % threading.currentThread())
-    yield from asyncio.sleep(1)
+    yield from asyncio.sleep(   )
     print('Hello again! (%s)' % threading.currentThread())
 
 
@@ -334,7 +334,7 @@ def async_test():
     loop = asyncio.get_event_loop()
     tasks = [async_test_gen(), async_test_gen()]
     loop.run_until_complete(asyncio.wait(tasks))
-    loop.close()
+    # loop.close()
 
 if __name__ == '__main__':
     main()
