@@ -230,7 +230,6 @@ def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None, bar = N
     if band == None:
         return
 
-    print("test uuid : "+ uuid)
     try:
         service = yield from band.getServiceByUUID(uuid)
         print("service found : " + uuid)
