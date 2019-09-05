@@ -232,14 +232,14 @@ def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None, bar = N
 
     # print("test uuid : "+ uuid)
     if file :
-        file.write("test uuid : "+ uuid)
-        
+        file.write("test uuid : " + uuid +'\n')
+
     try:
         service = yield from band.getServiceByUUID(uuid)
         # print("service found : " + uuid)
         # print("service : ", service)
         if file :
-            file.write({'uuid' : uuid, 'service' : service,})
+            file.write({'uuid' : uuid, 'service' : service,} + '\n')
         return 
     except :
         # print("no service with uuid : " + uuid)
@@ -288,7 +288,7 @@ def testServiceSimpleAsync(band):
     #                     # print("task uuid : " + _uuid)
     #                     tasks.append(testServiceOneAsync(band, _uuid, file = file, bar = progress_bar))
     #                     make_tasks_progress_bar.update(1)
-    print("task len : " + str(len(tasks)))
+    # print("task len : " + str(len(tasks)))
     make_tasks_progress_bar.close()
 
     # run
@@ -297,6 +297,7 @@ def testServiceSimpleAsync(band):
     # close file
     file.close()
     progress_bar.close()
+    return loop
 
     
 def testServiceSimple(band):
@@ -318,7 +319,7 @@ def testServiceSimple(band):
             'uuid' : uuid,
             'service' : service,
         }
-        file.write(d)
+        file.write(d + '\n')
     
     for i in range(16**8 - 1):
         a = "{:0>8s}".format(str(hex(i))[2:])[-8:]
@@ -339,7 +340,7 @@ def testServiceSimple(band):
                             'uuid' : uuid,
                             'service' : service,
                         }
-                        file.write(d)
+                        file.write(d + '\n')
 
     # 关闭文件
     file.close()
