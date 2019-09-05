@@ -69,6 +69,9 @@ from lib.miband2.base import MiBand2
 from lib.miband2.constants import ALERT_TYPES
 from lib.miband2.constants import UUIDS
 import struct
+import threading
+import asyncio
+
 
 def main():
     result = bluetooth.scan()
@@ -208,7 +211,7 @@ def testUUIDSOne(band, uuid = UUIDS.CHARACTERISTIC_BATTERY):
     except :
         pass
 
-    
+
 def testServiceOne(band, uuid = UUIDS.SERVICE_MIBAND1):
     if band == None:
         return
@@ -220,12 +223,54 @@ def testServiceOne(band, uuid = UUIDS.SERVICE_MIBAND1):
     except :
         return None, None
 
+
+async def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None):
+    if band == None:
+        return
+
+    print("test uuid : "+ uuid)
+    try:
+        service = await band.getServiceByUUID(uuid)
+        print("service found : " + uuid)
+        print("service : ", service)
+        if file :
+            file.write({'uuid' : uuid, 'service' : service,})
+        return uuid, service
+    except :
+        return None, None
+
+    
+def testServiceSimpleAsync(band):
+    if band == None:
+        return
+        
+    file = open('testServiceSimple.log', 'w', encoding='utf8')
+    # 写入文件内容
+
+    base = UUIDS.BASE
+    _uuid= None
+
+    loop = asyncio.get_event_loop()
+    tasks = []
+    # make tasks
+    for i in range(16**4 - 1):
+        _uuid = base % "{:0>4s}".format(str(hex(i))[2:])[-4:]
+        tasks.append(testServiceOneAsync(band, _uuid, band))
+    # run
+    loop.run_until_complete(asyncio.wait(tasks))
+    loop.close()
+    # close file
+    file.close()
+
     
 def testServiceSimple(band):
     if band == None:
         return
+        
+    file = open('testServiceSimple.log', 'w', encoding='utf8')
+    # 写入文件内容
+
     base = UUIDS.BASE
-    result = []
     _uuid, uuid, service = None, None, None
     for i in range(16**4 - 1):
         _uuid = base % "{:0>4s}".format(str(hex(i))[2:])[-4:]
@@ -233,10 +278,11 @@ def testServiceSimple(band):
         uuid, service = testServiceOne(band, _uuid)
         if uuid == None :
             pass
-        result.append({
+        d = {
             'uuid' : uuid,
             'service' : service,
-        })
+        }
+        file.write(d)
     
     for i in range(16**8 - 1):
         a = "{:0>8s}".format(str(hex(i))[2:])[-8:]
@@ -253,11 +299,14 @@ def testServiceSimple(band):
                         uuid, service = testServiceOne(band, _uuid)
                         if uuid == None :
                             pass
-                        result.append({
+                        d = {
                             'uuid' : uuid,
                             'service' : service,
-                        })
-    return result
+                        }
+                        file.write(d)
+
+    # 关闭文件
+    file.close()
 
     
 def reimport():
