@@ -265,39 +265,35 @@ def testServiceSimpleAsync(band):
     tasks = []
 
     # progress bar
-    progress_bar = tqdm(total=(16**4-1 + (16**30-1)), ascii=True, ncols=47, unit_scale=True, position=1)
-    make_tasks_progress_bar = tqdm(total=(16**4-1 + (16**30-1)), ascii=True, ncols=47, unit_scale=True, position=2)
+    progress_bar = tqdm(total=(16**4-1 + (16**30-1)), unit_scale=True)
     
     # make tasks
     for i in range(16**4 - 1):
         _uuid = base % "{:0>4s}".format(str(hex(i))[2:])[-4:]
         tasks.append(testServiceOneAsync(band, _uuid, file))
         # print("task uuid : " + _uuid)
-        make_tasks_progress_bar.update(1)
         
-    # for i in range(16**8 - 1):
-    #     a = "{:0>8s}".format(str(hex(i))[2:])[-8:]
-    #     for i in range(16**4 - 1):
-    #         b = "{:0>4s}".format(str(hex(i))[2:])[-4:]
-    #         for i in range(16**4 - 1):
-    #             c = "{:0>4s}".format(str(hex(i))[2:])[-4:]
-    #             for i in range(16**4 - 1):
-    #                 d = "{:0>4s}".format(str(hex(i))[2:])[-4:]
-    #                 for i in range(16**12 - 1):
-    #                     e = "{:0>12s}".format(str(hex(i))[2:])[-12:]
-    #                     _uuid = "%s-%s-%s-%s-%s" % (a, b, c, d, e)
-    #                     # print("task uuid : " + _uuid)
-    #                     tasks.append(testServiceOneAsync(band, _uuid, file = file, bar = progress_bar))
-    #                     make_tasks_progress_bar.update(1)
-    # print("task len : " + str(len(tasks)))
-    make_tasks_progress_bar.close()
+    for i in range(16**8 - 1):
+        a = "{:0>8s}".format(str(hex(i))[2:])[-8:]
+        for i in range(16**4 - 1):
+            b = "{:0>4s}".format(str(hex(i))[2:])[-4:]
+            for i in range(16**4 - 1):
+                c = "{:0>4s}".format(str(hex(i))[2:])[-4:]
+                for i in range(16**4 - 1):
+                    d = "{:0>4s}".format(str(hex(i))[2:])[-4:]
+                    for i in range(16**12 - 1):
+                        e = "{:0>12s}".format(str(hex(i))[2:])[-12:]
+                        _uuid = "%s-%s-%s-%s-%s" % (a, b, c, d, e)
+                        # print("task uuid : " + _uuid)
+                        tasks.append(testServiceOneAsync(band, _uuid, file = file, bar = progress_bar))
+    print("task len : " + str(len(tasks)))
 
     # run
-    # loop.run_until_complete(asyncio.wait(tasks))
+    loop.run_until_complete(asyncio.wait(tasks))
     # loop.close()
     # close file
     file.close()
-    # progress_bar.close()
+    progress_bar.close()
     # return loop, progress_bar
 
     
