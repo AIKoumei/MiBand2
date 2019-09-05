@@ -238,7 +238,8 @@ def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None):
             file.write({'uuid' : uuid, 'service' : service,})
         return uuid, service
     except :
-        return None, None
+        print("error with uuid : " + uuid)
+    return None, None
 
     
 def testServiceSimpleAsync(band):
@@ -256,8 +257,8 @@ def testServiceSimpleAsync(band):
     # make tasks
     for i in range(16**4 - 1):
         _uuid = base % "{:0>4s}".format(str(hex(i))[2:])[-4:]
-        tasks.append(testServiceOneAsync(band, _uuid, band))
-        print("task _uuid : " + _uuid)
+        tasks.append(testServiceOneAsync(band, _uuid, file))
+        print("task uuid : " + _uuid)
     # run
     print("task len : " + str(len(tasks)))
     loop.run_until_complete(asyncio.wait(tasks))
@@ -318,6 +319,22 @@ def reimport():
     except :
         pass
 
+
+# #############################################################################
+# # async test
+# #############################################################################
+@asyncio.coroutine
+def async_test_gen():
+    print('Hello world! (%s)' % threading.currentThread())
+    yield from asyncio.sleep(1)
+    print('Hello again! (%s)' % threading.currentThread())
+
+
+def async_test():
+    loop = asyncio.get_event_loop()
+    tasks = [async_test_gen(), async_test_gen()]
+    loop.run_until_complete(asyncio.wait(tasks))
+    loop.close()
 
 if __name__ == '__main__':
     main()
