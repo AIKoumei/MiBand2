@@ -108,16 +108,15 @@ def main():
     time.sleep(3)
     band.send_alert(ALERT_TYPES.NONE)
 
-    time.sleep(3)
-    print ('[info] Soft revision:',band.get_revision())
-    print ('[info] Hardware revision:',band.get_hrdw_revision())
-    print ('[info] Serial:',band.get_serial())
-    print ('[info] Battery:', band.get_battery_info())
-    print ('[info] Time:', band.get_current_time())
-    print ('[info] Steps:', band.get_steps())
-    print ('[info] Heart rate oneshot:', band.get_heart_rate_one_time())
+    # time.sleep(3)
+    # print ('[info] Soft revision:',band.get_revision())
+    # print ('[info] Hardware revision:',band.get_hrdw_revision())
+    # print ('[info] Serial:',band.get_serial())
+    # print ('[info] Battery:', band.get_battery_info())
+    # print ('[info] Time:', band.get_current_time())
+    # print ('[info] Steps:', band.get_steps())
 
-    testServiceSimpleAsync()
+    testServiceSimpleAsync(band)
     
     band.disconnect()
 
@@ -163,7 +162,6 @@ def getMiBand2(timeout = 5):
     print ('[info] Battery:', band.get_battery_info())
     print ('[info] Time:', band.get_current_time())
     print ('[info] Steps:', band.get_steps())
-    # print ('[info] Heart rate oneshot:', band.get_heart_rate_one_time())
 
     return band
 
