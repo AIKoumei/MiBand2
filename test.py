@@ -71,6 +71,7 @@ from lib.miband2.constants import UUIDS
 import struct
 import threading
 import asyncio
+from tqdm import tqdm
 
 
 def main():
@@ -225,7 +226,7 @@ def testServiceOne(band, uuid = UUIDS.SERVICE_MIBAND1):
 
 
 @asyncio.coroutine
-def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None):
+def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None, bar = bar):
     if band == None:
         return
 
@@ -236,10 +237,13 @@ def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None):
         print("service : ", service)
         if file :
             file.write({'uuid' : uuid, 'service' : service,})
-        return uuid, service
+        return 
     except :
-        print("error with uuid : " + uuid)
-    return None, None
+        print("no service with uuid : " + uuid)
+    finally:
+        if bar :
+            bar.update(1)
+    return uuid, service
 
     
 def testServiceSimpleAsync(band):
@@ -254,17 +258,37 @@ def testServiceSimpleAsync(band):
 
     loop = asyncio.get_event_loop()
     tasks = []
+
+    # progress bar
+    progress_bar = tqdm(total=len(16**4-1 + (16**30-1)))
+    
     # make tasks
     for i in range(16**4 - 1):
         _uuid = base % "{:0>4s}".format(str(hex(i))[2:])[-4:]
         tasks.append(testServiceOneAsync(band, _uuid, file))
         print("task uuid : " + _uuid)
-    # run
+        
+    for i in range(16**8 - 1):
+        a = "{:0>8s}".format(str(hex(i))[2:])[-8:]
+        for i in range(16**4 - 1):
+            b = "{:0>4s}".format(str(hex(i))[2:])[-4:]
+            for i in range(16**4 - 1):
+                c = "{:0>4s}".format(str(hex(i))[2:])[-4:]
+                for i in range(16**4 - 1):
+                    d = "{:0>4s}".format(str(hex(i))[2:])[-4:]
+                    for i in range(16**12 - 1):
+                        e = "{:0>12s}".format(str(hex(i))[2:])[-12:]
+                        _uuid = "%s-%s-%s-%s-%s" % (a, b, c, d, e)
+                        print("task uuid : " + _uuid)
+                        tasks.append(testServiceOneAsync(band, _uuid, file = file, bar = progress_bar))
     print("task len : " + str(len(tasks)))
+
+    # run
     loop.run_until_complete(asyncio.wait(tasks))
     # loop.close()
     # close file
     file.close()
+    progress_bar.close()
 
     
 def testServiceSimple(band):
