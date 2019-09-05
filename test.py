@@ -296,8 +296,8 @@ def testServiceSimpleAsync(band):
     # loop.close()
     # close file
     file.close()
-    progress_bar.close()
-    return loop
+    # progress_bar.close()
+    # return loop, progress_bar
 
     
 def testServiceSimple(band):
