@@ -226,7 +226,7 @@ def testServiceOne(band, uuid = UUIDS.SERVICE_MIBAND1):
 
 
 @asyncio.coroutine
-def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None, bar = bar):
+def testServiceOneAsync(band, uuid = UUIDS.SERVICE_MIBAND1, file = None, bar = None):
     if band == None:
         return
 
