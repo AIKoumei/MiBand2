@@ -257,7 +257,9 @@ def testServiceSimpleAsync(band):
     for i in range(16**4 - 1):
         _uuid = base % "{:0>4s}".format(str(hex(i))[2:])[-4:]
         tasks.append(testServiceOneAsync(band, _uuid, band))
+        print("task _uuid : " + _uuid)
     # run
+    print("task len : " + len(tasks))
     loop.run_until_complete(asyncio.wait(tasks))
     loop.close()
     # close file
