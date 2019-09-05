@@ -117,7 +117,8 @@ def main():
     print ('[info] Steps:', band.get_steps())
     print ('[info] Heart rate oneshot:', band.get_heart_rate_one_time())
 
-        
+    testServiceSimpleAsync()
+    
     band.disconnect()
 
     
@@ -290,7 +291,7 @@ def testServiceSimpleAsync(band):
 
     # run
     loop.run_until_complete(asyncio.wait(tasks))
-    # loop.close()
+    loop.close()
     # close file
     file.close()
     progress_bar.close()
